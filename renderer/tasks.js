@@ -8,6 +8,7 @@ exports.getTasksForDate = dateStr => {
 }
 
 exports.addTaskForDate = (dateStr, taskType, taskHours, taskMinutes) => {
+	console.log("Adding task for date")
 	if (!(dateStr in this.tasks)) {
 		this.tasks[dateStr] = {}
 	}
@@ -22,6 +23,7 @@ exports.addTaskForDate = (dateStr, taskType, taskHours, taskMinutes) => {
 }
 
 exports.updateTaskForDate = (dateStr, taskType, taskHours, taskMinutes) => {
+	console.log("Updating task for date")
 	if (!(dateStr in this.tasks)) {
 		console.log("Trying to update item but can't find date: " + dateStr)
 		return false;
@@ -32,8 +34,8 @@ exports.updateTaskForDate = (dateStr, taskType, taskHours, taskMinutes) => {
 		return false;
 	}
 
-	this.tasks[dateStr][taskType]["hours"] = taskHours
-	this.tasks[dateStr][taskType]["minutes"] = taskMinutes
+	this.tasks[dateStr][taskType]["hours"] = parseInt(taskHours)
+	this.tasks[dateStr][taskType]["minutes"] = parseInt(taskMinutes)
 
 	this.save()
 }
