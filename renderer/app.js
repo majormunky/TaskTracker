@@ -1,4 +1,4 @@
-const {getTasksForDate, addTaskForDate, updateTaskForDate} = require("./tasks")
+const {getTasksForDate, addTaskForDate, updateTaskForDate, deleteTaskForDate} = require("./tasks")
 
 let showModal = document.getElementById("show-modal")
 let prevDay = document.getElementById("prev-day")
@@ -8,6 +8,7 @@ let modal = document.getElementById("modal");
 let closeModal = document.getElementById("close-modal")
 let addItem = document.getElementById("add-item")
 let saveItem = document.getElementById("save-item")
+let deleteItem = document.getElementById("delete-item")
 let taskType = document.getElementById("task-type")
 let hoursInput = document.getElementById("add-hours")
 let minutesInput = document.getElementById("add-minutes")
@@ -45,6 +46,7 @@ nextDay.addEventListener("click", e => {
 showModal.addEventListener("click", e => {
 	modal.style.display = "flex"
 	saveItem.style.display = "none"
+	deleteItem.style.display = "none"
 	addItem.style.display = "inline"
 })
 
@@ -76,6 +78,15 @@ saveItem.addEventListener("click", e => {
 	closeModal.click()
 })
 
+deleteItem.addEventListener("click", e => {
+	let kind = taskType.value
+	let selectedDateStr = buildDateString(selectedDate)
+
+	deleteTaskForDate(selectedDateStr, kind)
+	refreshTasks()
+	closeModal.click()
+})
+
 function addEditButtonListeners() {
 	console.log("addEditButtonListeners running")
 	let editButtons = document.querySelectorAll(".edit-button")
@@ -92,6 +103,7 @@ function addEditButtonListeners() {
 			showModal.click()
 			addItem.style.display = "none"
 			saveItem.style.display = "inline"
+			deleteItem.style.display = "inline"
 			taskType.value = item
 			hoursInput.value = hours
 			minutesInput.value = minutes

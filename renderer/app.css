@@ -18,6 +18,10 @@ button {
 	outline: none;
 }
 
+.danger-button {
+	background-color: red;
+}
+
 input {
 	font-size: 20px;
 	border-radius: 5px;

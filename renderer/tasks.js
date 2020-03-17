@@ -26,16 +26,32 @@ exports.updateTaskForDate = (dateStr, taskType, taskHours, taskMinutes) => {
 	console.log("Updating task for date")
 	if (!(dateStr in this.tasks)) {
 		console.log("Trying to update item but can't find date: " + dateStr)
-		return false;
+		return false
 	}
 
 	if (!(taskType in this.tasks[dateStr])) {
 		console.log("Unable to find task type (" + taskType + ") for date: " + taskType)
-		return false;
+		return false
 	}
 
 	this.tasks[dateStr][taskType]["hours"] = parseInt(taskHours)
 	this.tasks[dateStr][taskType]["minutes"] = parseInt(taskMinutes)
+
+	this.save()
+}
+
+exports.deleteTaskForDate = (dateStr, taskType) => {
+	if (!(dateStr in this.tasks)) {
+		console.log("Trying to update item but can't find date: " + dateStr)
+		return false
+	}
+
+	if (!(taskType in this.tasks[dateStr])) {
+		console.log("Unable to find task type (" + taskType + ") for date: " + taskType)
+		return false
+	}
+
+	delete this.tasks[dateStr][taskType]
 
 	this.save()
 }
