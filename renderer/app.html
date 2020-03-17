@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
+        <title>TimeTracker</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body>
+    	<header>
+    		<button id="show-modal">+</button>
+    		<div class="button-group">
+    			<button id="prev-day"><</button>
+    			<input type="text" id="selected-date" />
+    			<button id="next-day">></button>
+    		</div>
+    	</header>
+    	<main>
+    		<p id="no-items">No Items</p>
+    		<div id="items"></div>
+    	</main>
+    	<div id="modal">
+    		<div class="form-item">
+    			<label>Type</label>
+	    		<select id="task-type">
+	    			<option value="ellington">Ellington</option>
+	    			<option value="Advertising">Advertising</option>
+	    		</select>
+    		</div>
+    		<div class="form-item">
+    			<label>Hours</label>
+    			<input type="text" id="add-hours" />
+    		</div>
+    		<div class="form-item">
+    			<label>Minutes</label>
+	    		<input type="text" id="add-minutes" />
+	    	</div>
+	    	<div class="form-buttons">
+	    		<button id="add-item">Add</button>
+	    		<button id="close-modal">Cancel</button>
+	    	</div>
+    	</div>
+    	<script>
+    		require("./app")
+    	</script>
+    </body>
+</html>

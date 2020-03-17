@@ -16,7 +16,7 @@ function createWindow() {
     })
 
     // Load index.html into the new BrowserWindow
-    mainWindow.loadFile('renderer/main.html')
+    mainWindow.loadFile('renderer/app.html')
 
     // Open DevTools - Remove for PRODUCTION!
     mainWindow.webContents.openDevTools()
