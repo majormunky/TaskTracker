@@ -1,4 +1,4 @@
-const {getTasksForDate, addTaskForDate} = require("./tasks")
+const {getTasksForDate, addTaskForDate, updateTaskForDate} = require("./tasks")
 
 let showModal = document.getElementById("show-modal")
 let prevDay = document.getElementById("prev-day")
@@ -7,6 +7,7 @@ let dateInput = document.getElementById("selected-date")
 let modal = document.getElementById("modal");
 let closeModal = document.getElementById("close-modal")
 let addItem = document.getElementById("add-item")
+let saveItem = document.getElementById("save-item")
 let taskType = document.getElementById("task-type")
 let hoursInput = document.getElementById("add-hours")
 let minutesInput = document.getElementById("add-minutes")
@@ -43,6 +44,8 @@ nextDay.addEventListener("click", e => {
 
 showModal.addEventListener("click", e => {
 	modal.style.display = "flex"
+	saveItem.style.display = "none"
+	addItem.style.display = "inline"
 })
 
 closeModal.addEventListener("click", e => {
@@ -50,14 +53,25 @@ closeModal.addEventListener("click", e => {
 })
 
 addItem.addEventListener("click", e => {
-	let kind = taskType.value;
-	let hours = hoursInput.value;
-	let minutes = minutesInput.value;
+	let kind = taskType.value
+	let hours = hoursInput.value
+	let minutes = minutesInput.value
 	// let totalTime = buildTime(hours, minutes)
 	let selectedDateStr = buildDateString(selectedDate)
 
 	addTaskForDate(selectedDateStr, kind, hours, minutes)
 
+	refreshTasks()
+	closeModal.click()
+})
+
+saveItem.addEventListener("click", e => {
+	let kind = taskType.value
+	let hours = hoursInput.value
+	let minutes = minutesInput.value
+	let selectedDateStr = buildDateString(selectedDate)
+
+	updateTaskForDate(selectedDateStr, kind, hours, minutes)
 	refreshTasks()
 	closeModal.click()
 })
@@ -74,7 +88,10 @@ function addEditButtonListeners() {
 			let minutes = e.target.dataset.timeMinutes
 			let date = buildDateString(selectedDate)
 
+			
 			showModal.click()
+			addItem.style.display = "none"
+			saveItem.style.display = "inline"
 			taskType.value = item
 			hoursInput.value = hours
 			minutesInput.value = minutes

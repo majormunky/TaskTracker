@@ -21,6 +21,23 @@ exports.addTaskForDate = (dateStr, taskType, taskHours, taskMinutes) => {
 	this.save()
 }
 
+exports.updateTaskForDate = (dateStr, taskType, taskHours, taskMinutes) => {
+	if (!(dateStr in this.tasks)) {
+		console.log("Trying to update item but can't find date: " + dateStr)
+		return false;
+	}
+
+	if (!(taskType in this.tasks[dateStr])) {
+		console.log("Unable to find task type (" + taskType + ") for date: " + taskType)
+		return false;
+	}
+
+	this.tasks[dateStr][taskType]["hours"] = taskHours
+	this.tasks[dateStr][taskType]["minutes"] = taskMinutes
+
+	this.save()
+}
+
 exports.save = () => {
 	localStorage.setItem("tasks", JSON.stringify(this.tasks))
 }
