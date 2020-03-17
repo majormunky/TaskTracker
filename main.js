@@ -19,7 +19,7 @@ function createWindow() {
     mainWindow.loadFile('renderer/app.html')
 
     // Open DevTools - Remove for PRODUCTION!
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
 
     // Tell the state manager which window to manage
     state.manage(mainWindow)
